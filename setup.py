@@ -6,9 +6,11 @@ from config import sources, target, kernels
 target = target.lower()
 
 # Set environment variables
+PYTHON = 'python3'
+
 thunderkittens_root = os.getenv('THUNDERKITTENS_ROOT', os.path.abspath(os.path.join(os.getcwd(), '.')))
-python_include = subprocess.check_output(['python', '-c', "import sysconfig; print(sysconfig.get_path('include'))"]).decode().strip()
-torch_include = subprocess.check_output(['python', '-c', "import torch; from torch.utils.cpp_extension import include_paths; print(' '.join(['-I' + p for p in include_paths()]))"]).decode().strip()
+python_include = subprocess.check_output([PYTHON, '-c', "import sysconfig; print(sysconfig.get_path('include'))"]).decode().strip()
+torch_include = subprocess.check_output([PYTHON, '-c', "import torch; from torch.utils.cpp_extension import include_paths; print(' '.join(['-I' + p for p in include_paths()]))"]).decode().strip()
 print('Thunderkittens root:', thunderkittens_root)
 print('Python include:', python_include)
 print('Torch include directories:', torch_include)
@@ -58,6 +60,8 @@ for k in kernels:
     else:
         source_files.append(sources[k]['source_files'][target])
     cpp_flags.append(f'-DTK_COMPILE_{k.replace(" ", "_").upper()}')
+
+print(source_files)
 
 setup(
     name='thunderkittens',

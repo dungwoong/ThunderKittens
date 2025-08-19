@@ -2,7 +2,8 @@
 sources = {
     'attn': {
         'source_files': {
-            'h100': 'kernels/attn/h100/h100.cu' # define these source files for each GPU target desired.
+            'h100': 'kernels/attn/h100/h100.cu', # define these source files for each GPU target desired.
+            '4090': 'kernels/attn/demo/4090.cu'
         }
     },
     'hedgehog': {
@@ -68,7 +69,7 @@ sources = {
 ### WHICH KERNELS DO WE WANT TO BUILD?
 # (oftentimes during development work you don't need to redefine them all.)
 # kernels = ['attn', 'mamba2', 'hedgehog', 'fftconv', 'fused_rotary', 'based', 'fused_layernorm']
-kernels = ['fp8_gemm']
+kernels = ['attn']
 
 ### WHICH GPU TARGET DO WE WANT TO BUILD FOR?
-target = 'h100'
+target = '4090'

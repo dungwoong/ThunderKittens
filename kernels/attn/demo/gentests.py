@@ -2,7 +2,7 @@ import torch
 from tqdm import trange
 import numpy as np
 import sys
-from einops import rearrange, repeat
+# from einops import rearrange, repeat
 import math
 
 # only generate a single batch/head of data, which makes file loading much faster.
